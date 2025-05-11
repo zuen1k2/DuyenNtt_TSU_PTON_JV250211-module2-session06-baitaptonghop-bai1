@@ -8,14 +8,14 @@ export default function AddWork() {
     const [modalMessen, setModalMessen] = useState('');
 
     useEffect(()=>{
-      const local = JSON.parse(localStorage.getItem('task')) || [];
+      const local = JSON.parse(localStorage.getItem('tasks')) || [];
       setTaskList(local);
     }, []);
 
     const handSubmit = (e)=> {
         e.preventDefault();
 
-        if (taskInput) {
+        if (taskInput=='') {
          setModalMessen('Tên công việc không được phép để trống.');
          setShowModal(true);
           return;
@@ -46,24 +46,25 @@ export default function AddWork() {
                 <button type="submit" className="btn btn-info ms-2" >
                   Thêm
                 </button>
-              </form>
+               </form>
                {/* Modal cảnh báo lỗi */}
-               {showModal && 
-  <div className="overlay" hidden="">
-    <div className="modal-custom">
-      <div className="modal-header-custom">
-        <h5>Cảnh báo</h5>
+              {showModal &&  
+   <div className="overlay" >
+     <div className="modal-custom">
+       <div className="modal-header-custom">
+         <h5>Cảnh báo</h5>
         <i className="fas fa-xmark" onClick={handCloseModal} />
       </div>
       <div className="modal-body-custom">
-        <p>{modalMessen}</p>
+          <p>{modalMessen}</p>
       </div>
       <div className="modal-footer-footer">
         <button className="btn btn-light" onClick={handCloseModal}>Đóng</button>
       </div>
     </div>
-  </div>
+  </div> 
 }
+
   </div>
   )
 }
